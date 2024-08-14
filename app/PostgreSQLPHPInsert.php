@@ -36,4 +36,20 @@ class PostgreSQLPHPInsert {
 
     return $idList;
   }
+
+  public function insertPlansList($plans) {
+    $sql = 'INSERT INTO plans (plan) VALUES (:plan)';
+
+    $stmt = $this->pdo->prepare($sql);
+
+    $idList = [];
+
+    foreach ($plans as $plan) {
+      $stmt->bindValue(':plan', $plan);
+      $stmt->execute();
+      $idList[] = $this->pdo->lastInsertId('plans_id_seq');
+    }
+    
+    return $idList;
+  }
 }

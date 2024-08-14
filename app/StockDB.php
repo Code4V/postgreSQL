@@ -23,4 +23,14 @@ class StockDB {
     
     return $stocks;
   }
+
+  public function findByPK($id) {
+    $stmt = $this->pdo->prepare('SELECT id, symbol, company FROM stocks WHERE id = :id');
+
+    $stmt->bindValue(':id', $id);
+
+    $stmt->execute();
+
+    return $stmt->fetchObject();
+  }
 }

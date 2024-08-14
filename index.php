@@ -4,6 +4,7 @@ require 'vendor/autoload.php';
 
 use PostgreSQLTutorial\Connection as Connection;
 use PostgreSQLTutorial\PostgreSQLCreateTable as PostgresSQLCreateTable;
+use PostgreSQLTutorial\PostgreSQLPHPInsert;
 use PostgreSQLTutorial\PostgreSQLPHPUpdate as PostgresSQLUpdate;
 use PostgreSQLTutorial\StockDB;
 
@@ -12,6 +13,11 @@ try {
 
   $pdo = Connection::get()->connect();
   $tableCreator = new PostgresSQLCreateTable($pdo);
+  $tableCreator->createTables();
+
+  $createPlans = new PostgreSQLPHPInsert($pdo);
+  $createdPlanIds = $createPlans->insertPlansList(['SILVER', 'GOLD', 'PLATINUM']);
+  
   $showAllStocks = new StockDB($pdo);
 
 
