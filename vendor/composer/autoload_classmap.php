@@ -7,7 +7,12 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'PostgreSQLTutorial\\AccountDB' => $baseDir . '/app/AccountDB.php',
     'PostgreSQLTutorial\\Connection' => $baseDir . '/app/Connection.php',
+    'PostgreSQLTutorial\\Data\\DataTable' => $baseDir . '/app/Data/DataTable.php',
+    'PostgreSQLTutorial\\PostgreSQLCreateFunction' => $baseDir . '/app/PostgreSQLCreateFunction.php',
     'PostgreSQLTutorial\\PostgreSQLCreateTable' => $baseDir . '/app/PostgreSQLCreateTable.php',
     'PostgreSQLTutorial\\PostgreSQLPHPInsert' => $baseDir . '/app/PostgreSQLPHPInsert.php',
+    'PostgreSQLTutorial\\PostgreSQLPHPUpdate' => $baseDir . '/app/PostgreSQLPHPUpdate.php',
+    'PostgreSQLTutorial\\StockDB' => $baseDir . '/app/StockDB.php',
 );

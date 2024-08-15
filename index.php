@@ -1,8 +1,9 @@
 <?php 
-
 require 'vendor/autoload.php';
 
+use PostgreSQLTutorial\AccountDB;
 use PostgreSQLTutorial\Connection as Connection;
+use PostgreSQLTutorial\PostgreSQLCreateFunction;
 use PostgreSQLTutorial\PostgreSQLCreateTable as PostgresSQLCreateTable;
 use PostgreSQLTutorial\PostgreSQLPHPInsert;
 use PostgreSQLTutorial\PostgreSQLPHPUpdate as PostgresSQLUpdate;
@@ -14,14 +15,15 @@ try {
   $pdo = Connection::get()->connect();
   $tableCreator = new PostgresSQLCreateTable($pdo);
   $tableCreator->createTables();
-
-  $createPlans = new PostgreSQLPHPInsert($pdo);
-  $createdPlanIds = $createPlans->insertPlansList(['SILVER', 'GOLD', 'PLATINUM']);
-  
   $showAllStocks = new StockDB($pdo);
 
+  
 
+  $accountDB = new AccountDB($pdo);
   $stocks = $showAllStocks->all();
+
+  $createSQLFunctions = new PostgreSQLCreateFunction($pdo);
+  $createSQLFunctions->createFunctions();
 
 } catch (\PDOException $e) {
   echo $e->getMessage();
@@ -40,7 +42,7 @@ try {
 <body>
   <div class="container">
     <h1>Stock List</h1>
-    <table class="table table-bordered">
+    <table class="table table-bordered mt-3">
       <thead>
         <tr>
           <th>ID</th>

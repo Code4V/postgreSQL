@@ -22,9 +22,14 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'PostgreSQLTutorial\\AccountDB' => __DIR__ . '/../..' . '/app/AccountDB.php',
         'PostgreSQLTutorial\\Connection' => __DIR__ . '/../..' . '/app/Connection.php',
+        'PostgreSQLTutorial\\Data\\DataTable' => __DIR__ . '/../..' . '/app/Data/DataTable.php',
+        'PostgreSQLTutorial\\PostgreSQLCreateFunction' => __DIR__ . '/../..' . '/app/PostgreSQLCreateFunction.php',
         'PostgreSQLTutorial\\PostgreSQLCreateTable' => __DIR__ . '/../..' . '/app/PostgreSQLCreateTable.php',
         'PostgreSQLTutorial\\PostgreSQLPHPInsert' => __DIR__ . '/../..' . '/app/PostgreSQLPHPInsert.php',
+        'PostgreSQLTutorial\\PostgreSQLPHPUpdate' => __DIR__ . '/../..' . '/app/PostgreSQLPHPUpdate.php',
+        'PostgreSQLTutorial\\StockDB' => __DIR__ . '/../..' . '/app/StockDB.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
