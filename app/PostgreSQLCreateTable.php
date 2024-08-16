@@ -40,6 +40,14 @@ class PostgreSQLCreateTable {
       PRIMARY KEY (account_id, plan_id),
       FOREIGN KEY (account_id) REFERENCES accounts(id), 
       FOREIGN KEY (plan_id) REFERENCES plans(id)
+    );',
+    'CREATE TABLE IF NOT EXISTS company_files (
+      id SERIAL PRIMARY KEY, 
+      stock_id INT NOT NULL,
+      mime_type VARCHAR(255) NOT NULL,
+      file_name VARCHAR(255) NOT NULL,
+      file_data BYTEA NOT NULL, 
+      FOREIGN KEY (stock_id) REFERENCES stocks (id)
     );'];
 
   foreach ($sqlList as $sql) {

@@ -6,18 +6,45 @@ namespace PostgreSQLTutorial\Data;
 
 class DataTable {
   private $keys; 
-  private $processedTable; 
+  private $processedTable = ''; 
   private $data;
+  private $title;
+
+
+  public function getKeys() {
+    return $this->keys; 
+  }
+  public function getTable() {
+    $this->generateTable();
+
+    return $this->processedTable;
+  }
+
+  public function getTitle() {
+    return $this->title;
+  }
+
+  public function setTitle(string $tableTitle) {
+    $this->title = $tableTitle;
+
+    return $this;
+  }
   function __construct($dataToDisplay) {
     $this->processKeys($dataToDisplay[0]);
     $this->data = $dataToDisplay;
-    $this->generateTable();
   }
 
   private function processKeys(array $arrayToExtractKeys) {
     $this->keys = array_keys($arrayToExtractKeys);
   }
 
+  private function generateTitle() {
+    $titleTag = '<div>';
+    $titleTag .= '<h1>'.$this->title.'</h1>';
+    $titleTag .= '</div>';
+
+    return $titleTag;
+  }
 
   private function generateHeader() {
     $headTag = '<tr>';
@@ -41,18 +68,14 @@ class DataTable {
   }
 
   private function generateTable() {
-    $this->processedTable = "<table class='table'>";
+    if (!empty($this->title)) {
+      $this->processedTable .= $this->generateTitle(); 
+    }
+    
+    $this->processedTable .= "<table class='table table-bordered'>";
     $this->processedTable .= $this->generateHeader();
     $this->processedTable .= $this->generateBody(); 
     $this->processedTable .= "</table>";
-  }
-
-  function getKeys() {
-    return $this->keys; 
-  }
-  function getTable() {
-
-    return $this->processedTable;
   }
 }
 

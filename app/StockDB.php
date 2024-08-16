@@ -33,4 +33,13 @@ class StockDB {
 
     return $stmt->fetchObject();
   }
+
+  public function delete($id) {
+    $sql = 'DELETE FROM stocks WHERE id=:id';
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([$id]);
+
+    return $stmt->rowCount();
+  }
 }

@@ -1,5 +1,6 @@
 <?php
 use PostgreSQLTutorial\PostgreSQLCreateFunction;
+use PostgreSQLTutorial\StockDB;
 
   require('../vendor/autoload.php');
 
@@ -15,7 +16,13 @@ use PostgreSQLTutorial\PostgreSQLCreateFunction;
   $accounts = new AccountDB($pdo);
   $accountList = $accounts->getAccounts();
 
-  (new DataTable($accountList))->getTable();
+  $myDataTable = new DataTable($accountList);
+
+  $myDataTable->setTitle('SHESH');
+
+  echo $myDataTable->getTitle();
+  echo $myDataTable->getTable();
+
 
 
 
@@ -56,7 +63,7 @@ use PostgreSQLTutorial\PostgreSQLCreateFunction;
       </tbody>
     </table>
 
-    <?= (new DataTable($accountList))->getTable(); ?>
+    <?= (new DataTable((new StockDB($pdo))->all()))->setTitle('Stocks')->getTable(); ?>
   </div>
 </body>
 </html>

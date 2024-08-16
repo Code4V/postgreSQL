@@ -2,6 +2,7 @@
 require 'vendor/autoload.php';
 
 use PostgreSQLTutorial\AccountDB;
+use PostgreSQLTutorial\BlobDB;
 use PostgreSQLTutorial\Connection as Connection;
 use PostgreSQLTutorial\PostgreSQLCreateFunction;
 use PostgreSQLTutorial\PostgreSQLCreateTable as PostgresSQLCreateTable;
@@ -16,14 +17,18 @@ try {
   $tableCreator = new PostgresSQLCreateTable($pdo);
   $tableCreator->createTables();
   $showAllStocks = new StockDB($pdo);
+  $showAllStocks->delete(1);
 
-  
-
-  $accountDB = new AccountDB($pdo);
+  $blobDB = new BlobDB($pdo);
   $stocks = $showAllStocks->all();
+  // $fileId = $blobDB->insert(2, 'logo', 'image/png', 'assets/images/City.jpg');
 
-  $createSQLFunctions = new PostgreSQLCreateFunction($pdo);
-  $createSQLFunctions->createFunctions();
+  $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+
+
+
+
+
 
 } catch (\PDOException $e) {
   echo $e->getMessage();
