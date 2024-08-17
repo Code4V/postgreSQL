@@ -23,13 +23,6 @@ try {
   $stocks = $showAllStocks->all();
   // $fileId = $blobDB->insert(2, 'logo', 'image/png', 'assets/images/City.jpg');
 
-  $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-
-
-
-
-
-
 } catch (\PDOException $e) {
   echo $e->getMessage();
 }

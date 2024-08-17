@@ -52,6 +52,35 @@ class AccountDB {
 
   }
 
+  public function updateAccount(int $id, array $infoUpdate){
+
+    $sql = 'UPDATE accounts SET ';
+
+    $infoKeys = array_keys($infoUpdate);
+
+    for ($i = 0 ; $i < count($infoKeys) ; $i += 1) {
+      $sql .= "$infoKeys[$i] = :$infoKeys[$i] ";
+
+      if (!empty($infoKeys[$i + 1])) 
+        $sql .= 'AND ';
+    }
+
+    $sql .= ' WHERE id= :id;';
+
+    $stmt = $this->pdo->prepare($sql);
+
+    
+    for ($i = 0 ; $i < count($infoKeys) ; $i += 1) {
+      $stmt->bindValue(":$infoKeys[$i]", $infoUpdate[$infoKeys[$i]]);
+
+      echo $infoKeys[$i] . ' ' . $infoUpdate[$infoKeys[$i]] . ' <br> ';
+    }
+
+    $stmt->bindValue(':id', $id);
+    
+    $stmt->execute();
+  }
+
   public function getAccounts() {
     $stmt = $this->pdo->query('SELECT * FROM get_accounts()');
     $accounts = [];

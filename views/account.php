@@ -15,17 +15,7 @@ use PostgreSQLTutorial\StockDB;
 
   $accounts = new AccountDB($pdo);
   $accountList = $accounts->getAccounts();
-
-  $myDataTable = new DataTable($accountList);
-
-  $myDataTable->setTitle('SHESH');
-
-  echo $myDataTable->getTitle();
-  echo $myDataTable->getTable();
-
-
-
-
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,7 +53,7 @@ use PostgreSQLTutorial\StockDB;
       </tbody>
     </table>
 
-    <?= (new DataTable((new StockDB($pdo))->all()))->setTitle('Stocks')->getTable(); ?>
+    <?= (new DataTable($accountList))->setTitle('Stocks')->getTable(); ?>
   </div>
 </body>
 </html>

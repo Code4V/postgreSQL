@@ -15,7 +15,7 @@ class DataTable {
     return $this->keys; 
   }
   public function getTable() {
-    $this->generateTable();
+    $this->buildTable();
 
     return $this->processedTable;
   }
@@ -29,7 +29,7 @@ class DataTable {
 
     return $this;
   }
-  function __construct($dataToDisplay) {
+  function __construct(array $dataToDisplay) {
     $this->processKeys($dataToDisplay[0]);
     $this->data = $dataToDisplay;
   }
@@ -38,7 +38,7 @@ class DataTable {
     $this->keys = array_keys($arrayToExtractKeys);
   }
 
-  private function generateTitle() {
+  private function generateTitle(): string{
     $titleTag = '<div>';
     $titleTag .= '<h1>'.$this->title.'</h1>';
     $titleTag .= '</div>';
@@ -46,16 +46,24 @@ class DataTable {
     return $titleTag;
   }
 
-  private function generateHeader() {
+  private function prettifyWord(array $keys): array {
+    $prettified = [];
+    foreach($keys as $key) {
+      $prettified[] = ucwords(str_replace('_', ' ', $key));
+    }
+    return $prettified;
+  }
+
+  private function generateHeader(): string {
     $headTag = '<tr>';
-    foreach($this->keys as $header) {
+    foreach($this->prettifyWord($this->keys) as $header) {
       $headTag .= "<th>". $header ."</th>";
     }
     $headTag .= '</tr>';
     return $headTag;
   }
 
-  private function generateBody() {
+  private function generateBody(): string {
     $bodyTag = '';
     foreach($this->data as $item) {
       $bodyTag .= '<tr>';
@@ -67,7 +75,7 @@ class DataTable {
     return $bodyTag; 
   }
 
-  private function generateTable() {
+  private function buildTable(): void {
     if (!empty($this->title)) {
       $this->processedTable .= $this->generateTitle(); 
     }
